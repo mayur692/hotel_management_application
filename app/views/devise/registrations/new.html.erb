@@ -1,0 +1,51 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card bg-white shadow-lg p-4" style="width: 28rem; border-radius: 1rem;">
+    <h2 class="text-center mb-4 text-primary">Create Your Account</h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation", novalidate: true }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <!-- Name Field -->
+      <div class="mb-3">
+        <%= f.label :name, class: "form-label fw-bold text-dark" %>
+        <%= f.text_field :name, class: "form-control rounded-pill bg-light text-dark border border-1 border-secondary", autofocus: true, autocomplete: "name", placeholder: "John Doe" %>
+      </div>
+
+      <!-- Email Field -->
+      <div class="mb-3">
+        <%= f.label :email, class: "form-label fw-bold text-dark" %>
+        <%= f.email_field :email, class: "form-control rounded-pill bg-light text-dark border border-1 border-secondary", autofocus: true, autocomplete: "email", placeholder: "john.doe@example.com" %>
+      </div>
+
+      <!-- Password Field -->
+      <div class="mb-3">
+        <%= f.label :password, class: "form-label fw-bold text-dark" %>
+        <% if @minimum_password_length %>
+          <small class="form-text text-muted">(<%= @minimum_password_length %> characters minimum)</small>
+        <% end %>
+        <%= f.password_field :password, class: "form-control rounded-pill bg-light text-dark border border-1 border-secondary", autocomplete: "new-password", placeholder: "••••••••" %>
+      </div>
+
+      <!-- Password Confirmation Field -->
+      <div class="mb-3">
+        <%= f.label :password_confirmation, class: "form-label fw-bold text-dark" %>
+        <%= f.password_field :password_confirmation, class: "form-control rounded-pill bg-light text-dark border border-1 border-secondary", autocomplete: "new-password", placeholder: "••••••••" %>
+      </div>
+
+      <!-- Role Field -->
+      <div class="mb-3">
+        <%= f.label :role, class: "form-label fw-bold text-dark" %>
+        <%= f.select :role, options_for_select(User.roles.keys.map { |role| [role.humanize, role] }), {}, class: "form-select rounded-pill bg-light text-dark border border-1 border-secondary", aria: { required: true } %>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-grid">
+        <%= f.submit "Sign Up", class: "btn btn-primary rounded-pill fw-bold" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

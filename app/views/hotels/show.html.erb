@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @hotel %>
+<% if @hotel.image.attached? %>
+  <%= image_tag url_for(@hotel.image), alt: @hotel.name, width: 300 %>
+<% else %>
+  <p>No image available</p>
+<% end %>
+<div>
+ 
+  <%= link_to "Back to hotels", hotels_path %> |
+  <%= link_to "View Rooms", hotel_rooms_path(@hotel)  %> | 
+
+
+  <%if  @user&.role == 'admin'  %>
+   <%= link_to "Edit this hotel", edit_hotel_path(@hotel) %> |
+   <%= button_to "Destroy this hotel", @hotel, method: :delete %> |  
+   <%= link_to "View Staffs",  hotel_staffs_path(@hotel) %>
+  <%end%>
+</div>

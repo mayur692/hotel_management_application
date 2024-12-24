@@ -1,16 +1,145 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>HotelManagementApplication</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "Hotel-Management-Application" %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbolinks-track": "reload" %>
+  <style>
+    /* Global body styles */
+    body {
+      background-color: #f9f9f9; /* Light background color for the whole page */
+      color: #333; /* Dark text color for readability */
+      font-family: Arial, sans-serif;
+    }
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-  </head>
+    /* Navbar styles */
+    .navbar {
+      background: linear-gradient(to right, #0062cc, #00bcd4); /* Gradient background for navbar */
+    }
 
-  <body>
+    .navbar-light .navbar-nav .nav-link {
+      color: white; /* White text for navbar links */
+    }
+
+    .navbar-light .navbar-nav .nav-link:hover {
+      color: #ffeb3b; /* Yellow on hover for navbar links */
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      color: white; /* White brand text */
+    }
+
+    .navbar-toggler-icon {
+      background-color: white; /* Toggler icon in white */
+    }
+
+    /* Main content area */
+    .container {
+      background-color: #ffffff; /* White background for main content */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: #004d40; /* Dark teal background for footer */
+      color: #ffffff; /* White text for footer */
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* Dropdown menu */
+    .dropdown-menu {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+    }
+
+    .dropdown-item {
+      color: #333;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Button styles */
+    .btn-primary {
+      background-color: #00bcd4; /* Teal button color */
+      border-color: #00bcd4;
+    }
+
+    .btn-primary:hover {
+      background-color: #0097a7; /* Darker teal on hover */
+      border-color: #0097a7;
+    }
+
+    /* Links */
+    a {
+      color: #0062cc; /* Blue links */
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #ffeb3b; /* Yellow on hover for links */
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <%= link_to "MyApp", root_path, class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <%= link_to "Home", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "About", "#", class: "nav-link" %>
+          </li>
+          <!-- User menu -->
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <%= link_to "#", class: "nav-link dropdown-toggle", id: "navbarDropdown", role: "button", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } do %>
+                <%= current_user.name %> <span class="caret"></span>
+              <% end %>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %></li>
+                <li><%= link_to 'Logout', destroy_user_session_path, data: {turbo_method: :delete} %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <div class="container mt-4">
     <%= yield %>
-  </body>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <%= Time.now.year %> RealEstateApp. All rights reserved.</p>
+  </footer>
+
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+</body>
 </html>

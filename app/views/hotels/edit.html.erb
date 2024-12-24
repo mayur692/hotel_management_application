@@ -1,0 +1,11 @@
+<div class="container my-5">
+  <div class="card bg-dark text-light shadow-lg p-4" style="border-radius: 1rem;">
+    <h1 class="text-primary text-center mb-4">Edit Hotel</h1>
+
+    <!-- Render Form -->
+    <%= render "form", hotel: @hotel %>
+
+    <!-- Navigation Links -->
+    <div class="d-flex justify-content-between mt-4">
+      <%= link_to "Show this hotel", @hotel, class: "btn btn-outline-light rounded-pill fw-bold" %>
+      <%= link_to "Back

@@ -1,0 +1,28 @@
+<%= form_with(model: [@hotel, @room]) do |form| %>
+  <% if room.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+        <% room.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :Type, style: "display: block" %>
+    <%= form.text_field :Type %>
+  </div>
+
+  <div>
+    <%= form.label :room_rate, style: "display: block" %>
+    <%= form.text_field :room_rate %>
+  </div>
+
+  <%= form.hidden_field :hotel_id, value: @hotel.id %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

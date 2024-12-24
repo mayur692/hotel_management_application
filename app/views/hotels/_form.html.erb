@@ -1,0 +1,41 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card bg-white text-dark shadow-lg p-4" style="width: 28rem; border-radius: 1rem;">
+    <h2 class="text-center mb-4 text-primary">Manage Hotel</h2>
+
+    <%= form_with(model: @hotel, local: true, html: { multipart: true, class: "needs-validation" }) do |form| %>
+      <% if @hotel.errors.any? %>
+        <div class="alert alert-danger">
+          <h4 class="alert-heading"><%= pluralize(@hotel.errors.count, "error") %> prohibited this hotel from being saved:</h4>
+          <ul>
+            <% @hotel.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <!-- Hotel Name -->
+      <div class="mb-3">
+        <%= form.label :name, class: "form-label fw-bold text-dark" %>
+        <%= form.text_field :name, class: "form-control rounded-pill bg-light text-dark border border-1 border-secondary", placeholder: "Enter hotel name" %>
+      </div>
+
+      <!-- Hotel Address -->
+      <div class="mb-3">
+        <%= form.label :address, class: "form-label fw-bold text-dark" %>
+        <%= form.text_area :address, class: "form-control bg-light text-dark border border-1 border-secondary", rows: 4, placeholder: "Enter hotel address" %>
+      </div>
+
+      <!-- Hotel Image -->
+      <div class="mb-3">
+        <%= form.label :image, class: "form-label fw-bold text-dark" %>
+        <%= form.file_field :image, class: "form-control bg-light text-dark border border-1 border-secondary" %>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-grid">
+        <%= form.submit "Save Hotel", class: "btn btn-primary rounded-pill fw-bold" %>
+      </div>
+    <% end %>
+  </div>
+</div>

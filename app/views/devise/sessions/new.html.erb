@@ -1,0 +1,36 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card bg-white shadow-lg p-4" style="width: 24rem; border-radius: 1rem;">
+    <h2 class="text-center mb-4 text-primary">Log In</h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "needs-validation", novalidate: true }) do |f| %>
+      <!-- Email Field -->
+      <div class="mb-3">
+        <%= f.label :email, class: "form-label fw-bold text-dark" %>
+        <%= f.email_field :email, class: "form-control rounded-pill bg-light text-dark border border-1 border-secondary", autofocus: true, autocomplete: "email", placeholder: "Enter your email" %>
+      </div>
+
+      <!-- Password Field -->
+      <div class="mb-3">
+        <%= f.label :password, class: "form-label fw-bold text-dark" %>
+        <%= f.password_field :password, class: "form-control rounded-pill bg-light text-dark border border-1 border-secondary", autocomplete: "current-password", placeholder: "••••••••" %>
+      </div>
+
+      <!-- Remember Me -->
+      <% if devise_mapping.rememberable? %>
+        <div class="mb-3 form-check">
+          <%= f.check_box :remember_me, class: "form-check-input bg-light border border-1 border-secondary", id: "remember_me" %>
+          <%= f.label :remember_me, class: "form-check-label text-dark", for: "remember_me" %>
+        </div>
+      <% end %>
+
+      <!-- Submit Button -->
+      <div class="d-grid">
+        <%= f.submit "Log In", class: "btn btn-primary rounded-pill fw-bold" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

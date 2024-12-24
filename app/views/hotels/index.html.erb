@@ -1,0 +1,37 @@
+<p style="color: green"><%= notice %></p>
+
+<h1 class="text-center mb-4 text-primary">Hotels</h1>
+
+<div id="hotels" class="row justify-content-center g-4">
+  <% @hotels.each do |hotel| %>
+    <div class="col-md-4">
+      <div class="card shadow-sm rounded">
+        <!-- Hotel Name on top of card -->
+        <div class="card-header bg-light text-dark text-center">
+          <h5 class="card-title mb-0"><%= hotel.name %></h5>
+        </div>
+
+        <div class="card-body">
+          <!-- Hotel Image -->
+          <% if hotel.image.attached? %>
+            <div class="mb-3">
+              <%= image_tag hotel.image, alt: "#{hotel.name} image", style: "max-width: 100%; max-height: 200px; object-fit: cover;" %>
+            </div>
+          <% else %>
+            <p>No image available for this hotel.</p>
+          <% end %>
+          
+          <p class="card-text text-dark"><%= truncate(hotel.address, length: 100) %></p>
+          
+          <%= link_to "Show this hotel", hotel, class: "btn btn-outline-primary rounded-pill w-100" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if @user.admin? %>
+  <div class="text-center mt-4">
+    <%= link_to "New hotel", new_hotel_path, class: "btn btn-success rounded-pill" %>
+  </div>
+<% end %>

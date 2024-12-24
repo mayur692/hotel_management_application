@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @room %>
+
+<div>
+
+<%= link_to "Back to rooms", hotel_rooms_path(@hotel) %>
+
+
+<%if  @user&.role == 'admin'  %>
+<%= button_to "Remove this room", hotel_room_path(@hotel, @room), method: :delete %>
+<%= link_to "Edit this room", edit_hotel_room_path(@hotel, @room) %>
+<%end%>
+</div>
